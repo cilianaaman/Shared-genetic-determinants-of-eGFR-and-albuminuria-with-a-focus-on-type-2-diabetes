@@ -2,8 +2,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri Mar 15 11:04:36 2024
-
 @author: cilianaaman
 """
 import openpyxl
@@ -25,7 +23,7 @@ from adjustText import adjust_text
 
 
 # Load Excel file
-df = pd.read_excel('C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Data/eGFR.xlsx')
+df = pd.read_excel('file/path/eGFR.xlsx')
 
 df=df.drop(labels="LocusCoordinates", axis=1)
 
@@ -44,7 +42,7 @@ del df
 ### Load the alb data ###
 #########################
 
-df_Genomic_alb = pd.read_excel('/Users/cilianaaman/Documents/Uni/Bachelor/6. sem/Bachelorprojekt/Data UKBB/Data_UKBB_alb.xlsx', sheet_name='Ark1')
+df_Genomic_alb = pd.read_excel('file/path/Data_UKBB_alb.xlsx', sheet_name='Ark1')
 
 # Select columns starting with "rs"
 rs_columns = [col for col in df_Genomic_alb.columns if col.startswith('rs')]
@@ -58,7 +56,7 @@ df_Genomic_alb[rs_columns] = df_Genomic_alb[rs_columns].apply(np.round)
 ##########################
 
 
-df_Genomic_eGFR = pd.read_excel('/Users/cilianaaman/Documents/Uni/Bachelor/6. sem/Bachelorprojekt/Data UKBB/Data_ukbb_eGFR.xlsx', sheet_name='Ark1')
+df_Genomic_eGFR = pd.read_excel('file/path/Data_ukbb_eGFR.xlsx', sheet_name='Ark1')
 
 # Select columns starting with "rs"
 rs_columns = [col for col in df_Genomic_eGFR.columns if col.startswith('rs')]
@@ -74,7 +72,7 @@ df_Genomic_eGFR[rs_columns] = df_Genomic_eGFR[rs_columns].apply(np.round)
 ###############################
 
 
-df_phenotype = pd.read_excel('/Users/cilianaaman/Documents/Uni/Bachelor/6. sem/Bachelorprojekt/Data UKBB/phenotype_data_alb_eGFR.xlsx', sheet_name='phenotype_data2', decimal=',')
+df_phenotype = pd.read_excel('file/path/phenotype_data_alb_eGFR.xlsx', sheet_name='phenotype_data2', decimal=',')
 
 
 import pickle
@@ -87,7 +85,7 @@ import pickle
 
 
 # Load variables
-with open('C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Data/variables.pkl', 'rb') as f:
+with open('file/path/variables.pkl', 'rb') as f:
     df_phenotype, df_Genomic_eGFR, df_Genomic_alb = pickle.load(f)
 
 
@@ -95,7 +93,7 @@ with open('C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Data/variables.pkl',
 df_Genomic_eGFR.drop(columns=['rs1004441_A.1'], inplace=True)
 
 
-ethnicity = pd.read_excel('C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Data/ethnicity.xlsx', sheet_name='ethnicity', decimal=',')
+ethnicity = pd.read_excel('file/path/ethnicity.xlsx', sheet_name='ethnicity', decimal=',')
 
 ################
 ### Withdraw ###
@@ -103,7 +101,7 @@ ethnicity = pd.read_excel('C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Data
 
 
 # Load the participants who have withdrawn
-withdraw = pd.read_csv('C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Data/withdraw.csv', header=None)
+withdraw = pd.read_csv('file/path/withdraw.csv', header=None)
 
 # Rename the column to 'Eid'
 withdraw.columns = ['Eid']
@@ -238,7 +236,7 @@ df_allele_fq['chr'] = df_allele_fq['chr'].astype(int)
 
 
 # Export the final table to an Excel file
-output_file = '/Users/cilianaaman/Documents/Article/result/EAF.xlsx'
+output_file = 'file/path/EAF.xlsx'
 df_allele_fq.to_excel(output_file, index=False)
 
 
@@ -253,7 +251,7 @@ df_allele_fq.to_excel(output_file, index=False)
 ######################
 ### Calculate UACR ###
 ######################
-creatinine_data = pd.read_csv('C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Data/creatinine_data.csv', header=None)
+creatinine_data = pd.read_csv('file/path/creatinine_data.csv', header=None)
 creatinine_data.columns = ['eid', 'creatinine_urine']
 creatinine_data = creatinine_data.iloc[1:].reset_index(drop=True)
 
@@ -712,7 +710,7 @@ del variables_to_delete
 
 
 # Load Excel file
-lookup = pd.read_excel('C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Data/lookup.xlsx')
+lookup = pd.read_excel('file/path/lookup.xlsx')
 
 
 # Step 1: Extract base rsID and EA from rsID
@@ -846,14 +844,14 @@ handles = [plt.Line2D([], [], color=color, marker=marker, linestyle='None') for 
 g.ax.legend(handles, legend_labels, loc='upper right', markerscale=1, fontsize=12, frameon=True, edgecolor='black')
 
 # save the plot
-save_path = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/Image/scatterplot_eGFR_2021_associated_with_UACR_a.jpg'
+save_path = 'file/path/scatterplot_eGFR_2021_associated_with_UACR_a.jpg'
 plt.savefig(save_path, dpi=500, bbox_inches='tight')
 
 plt.show()
 
 
 ############################################################ 
-####  Scatterplot eGFR 2021 rsID association with UACR ##### only bonferroni corrected
+####  Scatterplot eGFR 2021 rsID association with UACR ##### 
 ############################################################
 
 Scatter_plot_eGFR_2021_associated_with_UACR_significant['Beta_UACR'] = pd.to_numeric(Scatter_plot_eGFR_2021_associated_with_UACR_significant['Beta_UACR'], errors='coerce')
@@ -923,7 +921,7 @@ handles = [plt.Line2D([], [], color=color, marker=marker, linestyle='None') for 
 g.ax.legend(handles, legend_labels, loc='upper right', markerscale=1, fontsize=12, frameon=True, edgecolor='black')
 
 # save the plot
-save_path = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/Image/scatterplot_eGFR_2021_associated_with_UACR_b.jpg'
+save_path = 'file/path/scatterplot_eGFR_2021_associated_with_UACR_b.jpg'
 plt.savefig(save_path, dpi=500, bbox_inches='tight')
 
 
@@ -1007,7 +1005,7 @@ UACR_sensitivity_model1_significant = UACR_sensitivity_model1[UACR_sensitivity_m
 #####################################
 
 # Load the diabetes csv data using the Pandas library
-df_T2D = pd.read_csv('C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Data/df_preprocessed.csv')
+df_T2D = pd.read_csv('file/path/df_preprocessed.csv')
 
 # Select only the 'eid' and 'T2D' columns
 df_T2D = df_T2D[['eid', 'T2D']]
@@ -1277,7 +1275,7 @@ del Summary_T2D_2
 
 
 
-output_file = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/Summary.xlsx'
+output_file = 'file/path/Summary.xlsx'
 
 with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
     Summary_combined.to_excel(writer, sheet_name='Overall')
@@ -1356,7 +1354,7 @@ eGFR_2021_rsid_associated_with_UACR_model2_T2D['EA'] = split_rsID[1]
 
 
 # Load Excel file
-lookup = pd.read_excel('C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Data/lookup.xlsx')
+lookup = pd.read_excel('file/path/lookup.xlsx')
 
 
 
@@ -1492,7 +1490,7 @@ g.ax.grid(True, which='both', linestyle='--', linewidth=0.5)
 g.ax.legend(handles, legend_labels, loc='upper right', markerscale=1, fontsize=12, frameon=True, edgecolor='black')
 
 # save the plot
-save_path = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/Image/scatterplot_eGFR_2021_associated_with_UACR_T2D_no_text.jpg'
+save_path = 'file/path/scatterplot_eGFR_2021_associated_with_UACR_T2D_no_text.jpg'
 plt.savefig(save_path, dpi=300, bbox_inches='tight')
 
 
@@ -1560,7 +1558,7 @@ UACR_sensitivity_model1_significant_T2D = UACR_sensitivity_model1_T2D[UACR_sensi
 
 
 # Export the final table to an Excel file
-output_file = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/sensitivity_Results.xlsx'
+output_file = 'file/path/sensitivity_Results.xlsx'
 
 with pd.ExcelWriter(output_file, engine='xlsxwriter') as writer:
     UACR_sensitivity_model1.to_excel(writer, sheet_name='Overall', index=False)
@@ -1680,32 +1678,29 @@ print(f"Number of points in the 4th quadrant with 'B' in plotting_groups: {count
 # Sort the DataFrame by both p_val_UACR and p_val_eGFR_2021 in ascending order
 sorted_df = Scatter_plot_eGFR_2021_associated_with_UACR_significant.sort_values(by=['p_val_UACR', 'p_val_eGFR_2021'], ascending=True)
 
-# Select the top 5 rows
 top_5_rows = sorted_df.head(20)
 
-# Print the values in the rsID_eGFR_2021, p_val_UACR, and p_val_eGFR_2021 columns for the top 5 rows
 print(top_5_rows[['rsID_eGFR_2021', 'p_val_UACR', 'p_val_eGFR_2021']])
 
 # Sort the DataFrame by both p_val_UACR and p_val_eGFR_2021 in ascending order
 sorted_df_T2D = Scatter_plot_eGFR_2021_associated_with_UACR_significant_T2D.sort_values(by=['p_val_UACR', 'p_val_eGFR_2021'], ascending=True)
 
-# Select the top 5 rows
+
 top_5_rows = sorted_df_T2D.head(10)
 
-# Print the values in the rsID_eGFR_2021, p_val_UACR, and p_val_eGFR_2021 columns for the top 5 rows
 print(top_5_rows[['rsID_eGFR_2021', 'p_val_UACR', 'p_val_eGFR_2021']])
 
 #%%
 
 
 # Save to a specific folder 
-output_path = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/Scatter_plot_eGFR_2021_associated_with_UACR_significant_T2D.xlsx'
+output_path = 'file/path/Scatter_plot_eGFR_2021_associated_with_UACR_significant_T2D.xlsx'
 
 # Export to Excel
 Scatter_plot_eGFR_2021_associated_with_UACR_significant_T2D.to_excel(output_path, index=False, header=True)
 
 # Save to a specific folder (replace the path with your desired folder)
-output_path2 = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/Scatter_plot_eGFR_2021_associated_with_UACR_significant.xlsx'
+output_path2 = 'file/path/Scatter_plot_eGFR_2021_associated_with_UACR_significant.xlsx'
 
 # Export to Excel
 Scatter_plot_eGFR_2021_associated_with_UACR_significant.to_excel(output_path2, index=False, header=True)
@@ -1725,23 +1720,23 @@ result_table = pd.merge(
     Scatter_plot_eGFR_2021_associated_with_UACR_significant,
     left_on='base_rsID',
     right_on='rsID_eGFR_2021',
-    how='inner'  # Use 'inner' to keep only matching rows
+    how='inner' 
 )
 
 # Select and rename columns for the result table
 result_table3 = result_table[[
-    'base_rsID',             # SNP ID
+    'base_rsID',           
     'chr_x',
     'Gene_x',
-    'EA_x',               # Effect Allele
-    'OA',               # Other Allele
-    'EAF',              # MAF (minor allele frequency)
-    'Beta_eGFR_2021',   # Beta for eGFR
-    'p_val_eGFR_2021',  # P-value for eGFR
+    'EA_x',           
+    'OA',           
+    'EAF',           
+    'Beta_eGFR_2021',  
+    'p_val_eGFR_2021', 
     'eGFR CI Lower',
     'eGFR CI Upper',
-    'Beta_UACR',        # Beta for UACR
-    'p_val_UACR',        # P-value for UACR
+    'Beta_UACR',      
+    'p_val_UACR',     
     'UACR CI Lower',
     'UACR CI Upper'
 ]].rename(columns={
@@ -1777,19 +1772,19 @@ result_table = pd.merge(
     MLR_eGFR_2021_all,
     left_on='base_rsID',
     right_on='clean_rsID',
-    how='inner'  # Use 'inner' to keep only matching rows
+    how='inner' 
 )
 
 # Select and rename columns for the result table
 result_table1 = result_table[[
-    'base_rsID',             # SNP ID
+    'base_rsID',          
     'chr',
     'Gene',
-    'EA',               # Effect Allele
-    'OA',               # Other Allele
-    'EAF',              # MAF (minor allele frequency)
-    'Effect Size',   # Beta for eGFR
-    'P-value',  # P-value for eGFR
+    'EA',          
+    'OA',             
+    'EAF',            
+    'Effect Size',   
+    'P-value',  
     'CI Lower',
     'CI Upper'
 ]].rename(columns={
@@ -1811,30 +1806,30 @@ result_table1 = result_table1.drop_duplicates(subset='rsID', keep='first')
 ### result table MLR 2 overall population ###
 #############################################
 
-# Merge dataframes on 'rsID' (or the equivalent shared identifier)
+# Merge dataframes on 'rsID' 
 result_table = pd.merge(
     lookup,
     Scatter_plot_eGFR_2021_associated_with_UACR,
     left_on='base_rsID',
     right_on='rsID_eGFR_2021',
-    how='inner'  # Use 'inner' to keep only matching rows
+    how='inner'  
 )
 
 
 # Select and rename columns for the result table
 result_table2 = result_table[[
-    'base_rsID',             # SNP ID
+    'base_rsID',          
     'chr_x',
     'Gene_x',
-    'EA_x',               # Effect Allele
-    'OA',               # Other Allele
-    'EAF',              # MAF (minor allele frequency)
-    'Beta_eGFR_2021',   # Beta for eGFR
-    'p_val_eGFR_2021',  # P-value for eGFR
+    'EA_x',          
+    'OA',            
+    'EAF',           
+    'Beta_eGFR_2021',   
+    'p_val_eGFR_2021',
     'eGFR CI Lower',
     'eGFR CI Upper',
-    'Beta_UACR',        # Beta for UACR
-    'p_val_UACR',        # P-value for UACR
+    'Beta_UACR',       
+    'p_val_UACR',      
     'UACR CI Lower',
     'UACR CI Upper'
 ]].rename(columns={
@@ -1859,7 +1854,7 @@ result_table2 = result_table2.drop_duplicates(subset='rsID', keep='first')
 
 
 # Export the final table to an Excel file
-output_file = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/Overall Population Results.xlsx'
+output_file = 'file/path/Overall Population Results.xlsx'
 
 with pd.ExcelWriter(output_file, engine='xlsxwriter') as writer:
     result_table1.to_excel(writer, sheet_name='MLR 1', index=False)
@@ -1871,29 +1866,29 @@ with pd.ExcelWriter(output_file, engine='xlsxwriter') as writer:
 ### result table significant T2D population ###
 ###############################################
 
-# Merge dataframes on 'rsID' (or the equivalent shared identifier)
+# Merge dataframes on 'rsID'
 result_table = pd.merge(
     lookup,
     Scatter_plot_eGFR_2021_associated_with_UACR_significant_T2D,
     left_on='base_rsID',
     right_on='rsID_eGFR_2021',
-    how='inner'  # Use 'inner' to keep only matching rows
+    how='inner' 
 )
 
 # Select and rename columns for the result table
 result_table3 = result_table[[
-    'base_rsID',             # SNP ID
+    'base_rsID',          
     'chr_x',
     'Gene_x',
-    'EA_x',               # Effect Allele
-    'OA',               # Other Allele
-    'EAF',              # MAF (minor allele frequency)
-    'Beta_eGFR_2021',   # Beta for eGFR
-    'p_val_eGFR_2021',  # P-value for eGFR
+    'EA_x',             
+    'OA',             
+    'EAF',              
+    'Beta_eGFR_2021',   
+    'p_val_eGFR_2021', 
     'eGFR CI Lower',
     'eGFR CI Upper',
-    'Beta_UACR',        # Beta for UACR
-    'p_val_UACR',        # P-value for UACR
+    'Beta_UACR',        
+    'p_val_UACR',     
     'UACR CI Lower',
     'UACR CI Upper'
 ]].rename(columns={
@@ -1935,14 +1930,14 @@ result_table = pd.merge(
 
 # Select and rename columns for the result table
 result_table1 = result_table[[
-    'base_rsID',            # SNP ID
+    'base_rsID',        
     'chr',
     'Gene',
-    'EA',               # Effect Allele
-    'OA',               # Other Allele
-    'EAF',              # MAF (minor allele frequency)
-    'Effect Size',   # Beta for eGFR
-    'P-value',  # P-value for eGFR
+    'EA',             
+    'OA',               
+    'EAF',             
+    'Effect Size',   
+    'P-value',  
     'CI Lower',
     'CI Upper'
 ]].rename(columns={
@@ -1976,12 +1971,12 @@ result_table = pd.merge(
 
 # Select and rename columns for the result table
 result_table2 = result_table[[
-    'base_rsID',             # SNP ID
+    'base_rsID',            
     'chr_x',
     'Gene_x',
-    'EA_x',               # Effect Allele
-    'OA',               # Other Allele
-    'EAF',              # MAF (minor allele frequency)
+    'EA_x',              
+    'OA',               
+    'EAF',              
     'Beta_eGFR_2021',   
     'p_val_eGFR_2021',  
     'eGFR CI Lower',
@@ -2009,7 +2004,7 @@ result_table2 = result_table[[
 })
 
 # Export the final table to an Excel file
-output_file = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/T2D Results.xlsx'
+output_file = 'file/path/T2D Results.xlsx'
 
 with pd.ExcelWriter(output_file, engine='xlsxwriter') as writer:
     result_table1.to_excel(writer, sheet_name='MLR 1', index=False)
