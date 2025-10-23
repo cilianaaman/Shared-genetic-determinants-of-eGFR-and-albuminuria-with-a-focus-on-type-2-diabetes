@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed May 21 20:27:02 2025
 
 @author: cilianaaman
 """
@@ -12,8 +11,8 @@ import pandas as pd
 #%% overall population 
 
 # Load the Excel file
-file_path = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/Overall Population Results.xlsx'
-output_path = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/Overall Population Results With Percent Change.xlsx'
+file_path = 'file/path/Overall Population Results.xlsx'
+output_path = 'file/path/Overall Population Results With Percent Change.xlsx'
 
 # -------- MLR 1 --------
 df_mlr1 = pd.read_excel(file_path, sheet_name='MLR 1')
@@ -45,8 +44,8 @@ print("done :)")
 #%% T2D population
 
 # Load the Excel file
-file_path = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/T2D Results.xlsx'
-output_path = 'C:/Users/CNAA0005/Desktop/eGFR_UACR_article/eGFR/Results/T2D Results With Percent Change.xlsx'
+file_path = 'file/path/T2D Results.xlsx'
+output_path = 'file/path/T2D Results With Percent Change.xlsx'
 
 # -------- MLR 1 --------
 df_mlr1 = pd.read_excel(file_path, sheet_name='MLR 1')
