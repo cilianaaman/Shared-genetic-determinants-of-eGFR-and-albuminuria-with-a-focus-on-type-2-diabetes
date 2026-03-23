@@ -3,7 +3,6 @@
 ## Overview
 
 This repository contains Python code used to perform the genetic association analyses described in the manuscript "Shared genetic determinants of eGFR and albuminuria with a focus on type 2 diabetes: A large-scale European study"
-“Shared genetic determinants of eGFR and albuminuria with a focus on type 2 diabetes” .
 The code implements preprocessing, regression analyses, and visualization for the investigation of shared genetic loci influencing estimated glomerular filtration rate (eGFR) and urinary albumin-creatinine ratio (UACR) in UK Biobank participants.
 
 ## Repository contents
